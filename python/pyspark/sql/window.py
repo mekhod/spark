@@ -100,8 +100,8 @@ class Window(object):
                     The frame is unbounded if this is ``Window.unboundedFollowing``, or
                     any value greater than or equal to 9223372036854775807.
         """
-        if start <= Window._PRECEDING_THRESHOLD:
-            start = Window.unboundedPreceding
+        if start < Window._PRECEDING_THRESHOLD:
+            start = 0
         if end >= Window._FOLLOWING_THRESHOLD:
             end = Window.unboundedFollowing
         sc = SparkContext._active_spark_context
@@ -130,8 +130,8 @@ class Window(object):
                     The frame is unbounded if this is ``Window.unboundedFollowing``, or
                     any value greater than or equal to min(sys.maxsize, 9223372036854775807).
         """
-        if start <= Window._PRECEDING_THRESHOLD:
-            start = Window.unboundedPreceding
+        if start < Window._PRECEDING_THRESHOLD:
+            start = 0
         if end >= Window._FOLLOWING_THRESHOLD:
             end = Window.unboundedFollowing
         sc = SparkContext._active_spark_context
@@ -192,8 +192,8 @@ class WindowSpec(object):
                     The frame is unbounded if this is ``Window.unboundedFollowing``, or
                     any value greater than or equal to min(sys.maxsize, 9223372036854775807).
         """
-        if start <= Window._PRECEDING_THRESHOLD:
-            start = Window.unboundedPreceding
+        if start < Window._PRECEDING_THRESHOLD:
+            start = 0
         if end >= Window._FOLLOWING_THRESHOLD:
             end = Window.unboundedFollowing
         return WindowSpec(self._jspec.rowsBetween(start, end))
@@ -218,8 +218,8 @@ class WindowSpec(object):
                     The frame is unbounded if this is ``Window.unboundedFollowing``, or
                     any value greater than or equal to min(sys.maxsize, 9223372036854775807).
         """
-        if start <= Window._PRECEDING_THRESHOLD:
-            start = Window.unboundedPreceding
+        if start < Window._PRECEDING_THRESHOLD:
+            start = 0
         if end >= Window._FOLLOWING_THRESHOLD:
             end = Window.unboundedFollowing
         return WindowSpec(self._jspec.rangeBetween(start, end))
